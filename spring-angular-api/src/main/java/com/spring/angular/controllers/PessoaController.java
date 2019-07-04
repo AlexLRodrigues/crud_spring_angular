@@ -14,47 +14,32 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.angular.entidades.Documento;
 import com.spring.angular.entidades.Pessoa;
-import com.spring.angular.exceptions.ResourceNotFoundException;
-import com.spring.angular.repositorios.PessoaRepository;
+import com.spring.angular.services.PessoaService;
 
 @RestController
 public class PessoaController {
 
 	@Autowired
-	private PessoaRepository pessoaRepository;
+	private PessoaService pessoaService;
 
 	@GetMapping("/pessoas")
 	public Page<Pessoa> getPessoa(Pageable pageable) {
-		return pessoaRepository.findAll(pageable);
+		return pessoaService.buscarPessoas(pageable);
 	}
 
 	@PostMapping("/pessoas")
 	public Pessoa createPessoa(@Valid @RequestBody Pessoa pessoa) {
-		return pessoaRepository.save(pessoa);
+		return pessoaService.criarPessoa(pessoa);
 	}
 
 	@PutMapping("/pessoas/{pessoaId}")
 	public Pessoa updatePost(@PathVariable Long pessoaId, @Valid @RequestBody Pessoa pessoaRequest) {
-		return pessoaRepository.findById(pessoaId).map(pessoa -> {
-			pessoa.setNomePessoa(pessoaRequest.getNomePessoa());
-			pessoa.setEstado(pessoaRequest.getEstado());
-			
-			for (Documento doc : pessoaRequest.getListaDocumento()) {
-				doc.setPessoa(pessoa);
-			}
-			
-			pessoa.setListaDocumento(pessoaRequest.getListaDocumento());
-			return pessoaRepository.save(pessoa);
-		}).orElseThrow(() -> new ResourceNotFoundException("PessoaId " + pessoaId + " not found"));
+		return pessoaService.atualizarPessoa(pessoaId, pessoaRequest);
 	}
 
 	@DeleteMapping("/pessoas/{pessoaId}")
 	public ResponseEntity<?> deletePost(@PathVariable Long pessoaId) {
-		return pessoaRepository.findById(pessoaId).map(pessoa -> {
-			pessoaRepository.delete(pessoa);
-			return ResponseEntity.ok().build();
-		}).orElseThrow(() -> new ResourceNotFoundException("PessoaId " + pessoaId + " not found"));
+		return pessoaService.removerPessoa(pessoaId);
 	}
 }

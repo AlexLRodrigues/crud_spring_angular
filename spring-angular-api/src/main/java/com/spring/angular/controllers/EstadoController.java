@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.angular.entidades.Estado;
-import com.spring.angular.repositorios.EstadoRepository;
+import com.spring.angular.services.EstadoService;
 
 @RestController
 public class EstadoController {
 	
 	@Autowired
-	private EstadoRepository estadoRepository;
+	private EstadoService estadoService;
 	
 	@GetMapping("/estados")
-	public Page<Estado> getPessoa(Pageable pageable) {
-		return estadoRepository.findAll(pageable);
+	public Page<Estado> buscarEstados(Pageable pageable) {
+		return estadoService.buscarEstados(pageable);
 	}
 
 }

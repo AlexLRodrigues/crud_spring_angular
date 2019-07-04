@@ -6,4 +6,5 @@ import com.spring.angular.entidades.Estado;
 
 public interface EstadoRepository extends JpaRepository<Estado, Long> {
 
+
 }
