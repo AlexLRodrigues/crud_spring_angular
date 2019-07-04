@@ -1,9 +1,10 @@
 package com.spring.angular.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,8 +25,8 @@ public class PessoaController {
 	private PessoaService pessoaService;
 
 	@GetMapping("/pessoas")
-	public Page<Pessoa> getPessoa(Pageable pageable) {
-		return pessoaService.buscarPessoas(pageable);
+	public List<Pessoa> getPessoa(Pageable pageable) {
+		return pessoaService.buscarPessoas();
 	}
 
 	@PostMapping("/pessoas")

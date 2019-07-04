@@ -2,6 +2,7 @@ package com.spring.angular.entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -15,14 +16,12 @@ public class Estado {
 
 	@Id
 	@Column(name = "idEstado")
+	@GeneratedValue
 	private Long idEstado;
 
 	@Column(name = "nomeEstado")
 	private String nomeEstado;
 
-	@OneToOne(mappedBy = "estado")
-	private Pessoa pessoa;
-	
 	public Estado() {
 		super();
 	}
