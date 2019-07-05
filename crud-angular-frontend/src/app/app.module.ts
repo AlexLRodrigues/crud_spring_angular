@@ -10,8 +10,9 @@ import { PessoaEditComponent } from './pessoa-edit/pessoa-edit.component';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { HttpClientModule } from '@angular/common/http';
 
-import { PessoaService } from './pessoa.service';
-import { EstadoService } from './estado.service';
+import { PessoaService } from './services/pessoa.service';
+import { EstadoService } from './services/estado.service';
+import { FormsModule }   from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { EstadoService } from './estado.service';
     BrowserModule,
     AppRoutingModule,
     SlimLoadingBarModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     PessoaService,

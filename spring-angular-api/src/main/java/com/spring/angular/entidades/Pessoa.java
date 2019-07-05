@@ -29,12 +29,13 @@ public class Pessoa {
 	@Column(name = "nomePessoa")
 	private String nomePessoa;
 
+	@JsonManagedReference
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "estado_idEstado", referencedColumnName = "idEstado")
+	@JoinColumn(name = "estado_idEstado")
 	private Estado estado;
 
 	@JsonManagedReference
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "pessoa")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "pessoa", orphanRemoval=true)
 	private Set<Documento> listaDocumento = new HashSet<Documento>();
 	
 	public Pessoa() {
@@ -62,7 +63,12 @@ public class Pessoa {
 	}
 
 	public void setListaDocumento(Set<Documento> listaDocumento) {
-		this.listaDocumento = listaDocumento;
+		this.listaDocumento.clear();
+		
+        if (listaDocumento != null) {
+           this.listaDocumento.addAll(listaDocumento);
+        }
+        
 	}
 
 	public Estado getEstado() {

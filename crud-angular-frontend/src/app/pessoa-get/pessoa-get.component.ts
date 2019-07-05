@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PessoaService } from '../pessoa.service';
-import Pessoa from '../Pessoa';
+import { PessoaService } from '../services/pessoa.service';
+import Pessoa from '../models/Pessoa';
 
 @Component({
   selector: 'app-pessoa-get',
@@ -27,5 +27,4 @@ export class PessoaGetComponent implements OnInit {
       this.pessoas.splice(index, 1);
     });
   }
-
 }

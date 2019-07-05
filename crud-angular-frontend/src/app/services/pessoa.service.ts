@@ -10,15 +10,9 @@ export class PessoaService {
 
   constructor(private http: HttpClient) { }
 
-  addPessoa(nomePessoa) {
-    
-    const obj = {
-      nomePessoa
-    };
-
-    console.log(obj);
-    this.http.post(`${this.uri}`, obj)
-        .subscribe(res => console.log('Done'));
+  addPessoa(pessoa) {
+    return this.http.post(`${this.uri}`, pessoa)
+      .toPromise();
   }
 
   getPessoa() {
@@ -31,5 +25,16 @@ export class PessoaService {
     return this
               .http
               .delete(`${this.uri}/${id}`);
+  }
+
+  buscarPessoaPorID(id) {
+    return this
+            .http
+            .get(`${this.uri}/${id}`);
+  }
+
+  atualizarPessoa(pessoa){
+    return this.http.put(`${this.uri}`, pessoa)
+    .toPromise();
   }
 }

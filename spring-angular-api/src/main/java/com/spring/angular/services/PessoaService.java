@@ -19,7 +19,7 @@ public class PessoaService {
 
 	@Autowired
 	private PessoaRepository pessoaRepository;
-	
+
 	public List<Pessoa> buscarPessoas() {
 		return pessoaRepository.findAll();
 	}
@@ -28,18 +28,17 @@ public class PessoaService {
 		return pessoaRepository.save(pessoa);
 	}
 
-	public Pessoa atualizarPessoa(Long pessoaId, Pessoa pessoaRequest) {
-		return pessoaRepository.findById(pessoaId).map(pessoa -> {
+	public Pessoa atualizarPessoa(Pessoa pessoaRequest) {
+		return pessoaRepository.findById(pessoaRequest.getIdPessoa()).map(pessoa -> {
 			pessoa.setNomePessoa(pessoaRequest.getNomePessoa());
 			pessoa.setEstado(pessoaRequest.getEstado());
-			
+
 			for (Documento doc : pessoaRequest.getListaDocumento()) {
 				doc.setPessoa(pessoa);
 			}
-			
 			pessoa.setListaDocumento(pessoaRequest.getListaDocumento());
 			return pessoaRepository.save(pessoa);
-		}).orElseThrow(() -> new ResourceNotFoundException("PessoaId " + pessoaId + " not found"));
+		}).orElseThrow(() -> new ResourceNotFoundException("PessoaId " + pessoaRequest.getIdPessoa() + " not found"));
 	}
 
 	public ResponseEntity<?> removerPessoa(Long pessoaId) {
@@ -47,5 +46,9 @@ public class PessoaService {
 			pessoaRepository.delete(pessoa);
 			return ResponseEntity.ok().build();
 		}).orElseThrow(() -> new ResourceNotFoundException("PessoaId " + pessoaId + " not found"));
+	}
+
+	public Pessoa buscarPessoa(Long pessoaId) {
+		return pessoaRepository.buscarPorID(pessoaId);
 	}
 }

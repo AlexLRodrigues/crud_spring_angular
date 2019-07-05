@@ -10,11 +10,15 @@ const routes: Routes = [
     component: PessoaAddComponent
   },
   {
-    path: 'editar/:id',
+    path: 'editar/:idPessoa',
     component: PessoaEditComponent
   },
   {
     path: 'pessoas',
+    component: PessoaGetComponent
+  },
+  {
+    path: '',
     component: PessoaGetComponent
   }
 ];

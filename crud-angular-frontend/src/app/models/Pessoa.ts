@@ -4,6 +4,7 @@ import Documento from './Documento';
 export default class Pessoa {
     idPessoa: number;
     nomePessoa: string;
-    estado: Estado;
+    idEstado: number;
     listaDocumento: Documento[];
+    
 }

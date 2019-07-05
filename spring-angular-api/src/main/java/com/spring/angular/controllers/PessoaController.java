@@ -33,14 +33,19 @@ public class PessoaController {
 	public Pessoa createPessoa(@Valid @RequestBody Pessoa pessoa) {
 		return pessoaService.criarPessoa(pessoa);
 	}
+	
+	@GetMapping("/pessoas/{pessoaId}")
+	public Pessoa getPessoaById(@PathVariable Long pessoaId) {
+		return pessoaService.buscarPessoa(pessoaId);
+	}
 
-	@PutMapping("/pessoas/{pessoaId}")
-	public Pessoa updatePost(@PathVariable Long pessoaId, @Valid @RequestBody Pessoa pessoaRequest) {
-		return pessoaService.atualizarPessoa(pessoaId, pessoaRequest);
+	@PutMapping("/pessoas")
+	public Pessoa updatePessoa(@Valid @RequestBody Pessoa pessoa) {
+		return pessoaService.atualizarPessoa(pessoa);
 	}
 
 	@DeleteMapping("/pessoas/{pessoaId}")
-	public ResponseEntity<?> deletePost(@PathVariable Long pessoaId) {
+	public ResponseEntity<?> deletePessoa(@PathVariable Long pessoaId) {
 		return pessoaService.removerPessoa(pessoaId);
 	}
 }

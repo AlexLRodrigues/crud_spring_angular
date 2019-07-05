@@ -4,8 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -21,6 +23,10 @@ public class Estado {
 	@Column(name = "nomeEstado")
 	private String nomeEstado;
 
+	@JsonBackReference
+	@OneToOne(mappedBy = "estado")
+	private Pessoa pessoa;
+
 	public Estado() {
 		super();
 	}
@@ -29,6 +35,13 @@ public class Estado {
 		super();
 		this.idEstado = idEstado;
 		this.nomeEstado = nomeEstado;
+	}
+	
+	public Estado(Long idEstado, String nomeEstado, Pessoa pessoa) {
+		super();
+		this.idEstado = idEstado;
+		this.nomeEstado = nomeEstado;
+		this.pessoa = pessoa;
 	}
 
 	public Long getIdEstado() {
@@ -45,6 +58,14 @@ public class Estado {
 
 	public void setNomeEstado(String nomeEstado) {
 		this.nomeEstado = nomeEstado;
+	}
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 
 }
