@@ -1,8 +1,8 @@
 package com.spring.angular.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,8 +16,8 @@ public class EstadoController {
 	private EstadoService estadoService;
 	
 	@GetMapping("/estados")
-	public Page<Estado> buscarEstados(Pageable pageable) {
-		return estadoService.buscarEstados(pageable);
+	public List<Estado> buscarEstados() {
+		return estadoService.buscarEstados();
 	}
 
 }

@@ -4,13 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @Table(name = "estado")
 public class Estado {
 
@@ -25,11 +24,16 @@ public class Estado {
 	public Estado() {
 		super();
 	}
-	
+
+	public Estado(Long idEstado, String nomeEstado) {
+		super();
+		this.idEstado = idEstado;
+		this.nomeEstado = nomeEstado;
+	}
+
 	public Long getIdEstado() {
 		return idEstado;
 	}
-
 
 	public void setIdEstado(Long idEstado) {
 		this.idEstado = idEstado;

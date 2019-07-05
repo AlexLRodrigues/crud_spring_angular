@@ -1,8 +1,8 @@
 package com.spring.angular.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.spring.angular.entidades.Estado;
@@ -14,8 +14,8 @@ public class EstadoService {
 	@Autowired
 	private EstadoRepository estadoRepository;
 	
-	public Page<Estado> buscarEstados(Pageable pageable) {
-		return estadoRepository.findAll(pageable);
+	public List<Estado> buscarEstados() {
+		return estadoRepository.findAll();
 	}
 
 }
